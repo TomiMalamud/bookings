@@ -9,13 +9,15 @@ import SharedModal from './SharedModal'
 export default function Modal({
   images,
   onClose,
+  previousPath
 }: {
   images: ImageProps[]
   onClose?: () => void
+  previousPath?: string
+
 }) {
   let overlayRef = useRef()
   const router = useRouter()
-
   const { photoId } = router.query
   let index = Number(photoId)
 
@@ -23,9 +25,10 @@ export default function Modal({
   const [curIndex, setCurIndex] = useState(index)
 
   function handleClose() {
-    router.push('/', undefined, { shallow: true })
-    onClose()
+    router.push(previousPath || '/', undefined, { shallow: true });
+    onClose();
   }
+
 
   function changePhotoId(newVal: number) {
     if (newVal > index) {

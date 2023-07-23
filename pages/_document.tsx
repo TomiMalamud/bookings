@@ -1,5 +1,4 @@
 import Document, { Head, Html, Main, NextScript } from 'next/document'
-
 class MyDocument extends Document {
   render() {
     return (
@@ -23,7 +22,8 @@ class MyDocument extends Document {
             content="See pictures from Next.js Conf and the After Party."
           />
         </Head>
-        <body className=" antialiased">
+        
+        <body className="antialiased">
           <Main />
           <NextScript />
         </body>
