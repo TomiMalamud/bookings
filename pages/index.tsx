@@ -16,6 +16,9 @@ import Beds from '../components/Beds';
 import Location from '../components/Location';
 import Info from '../components/Info';
 import { ChevronDownIcon, ChevronUpIcon, PhotoIcon } from '@heroicons/react/24/outline';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const property = {
     title: 'Casa en Centro de Carlos Paz Pileta',
@@ -33,13 +36,23 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
     const router = useRouter()
     const { photoId } = router.query
     const [lastViewedPhoto, setLastViewedPhoto] = useLastViewedPhoto()
-    const [previousPath, setPreviousPath] = React.useState<string | null>(null);
     const [showMore, setShowMore] = useState(false);
+    const [activeSlide, setActiveSlide] = useState(0);
 
-    useEffect(() => {
-        setPreviousPath(router.asPath);
-    }, []);
-
+    const sliderSettings = {
+        dots: true,
+        lazyLoad: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        afterChange: (current) => setActiveSlide(current),
+        appendDots: (dots) => (
+            <div>
+                <p className='text-white bg-gray-900/60 px-2 font-semibold py-1 text-center justify-end absolute right-7 -mt-20 rounded-md text-xs w-18'>{`${activeSlide + 1} / ${dots.length}`}</p>
+            </div>
+        ),
+    };
+    
     const lastViewedPhotoRef = useRef<HTMLAnchorElement>(null)
 
     const handleToggleShowMore = () => {
@@ -84,10 +97,9 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
                         }}
                     />
                 )}
-
                 <h1 className="text-2xl font-semibold mb-2">{property.title}</h1>
                 <h2 className="text-md mb-4">{property.location}</h2>
-                <div className="columns-1 rounded-lg overflow-clip grid grid-cols-3 gap-2 sm:columns-2 xl:columns-3 2xl:columns-4">
+                <div className="hidden columns-1 rounded-lg overflow-clip sm:grid grid-cols-3 gap-2 sm:columns-2 xl:columns-3 2xl:columns-4">
                     {images.slice(0, 6).map(({ id, public_id, format, blurDataUrl }, index) => (
                         <Link
                             key={id}
@@ -121,6 +133,25 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
 
                     ))}
                 </div>
+{/* Mobile image slider */}
+<div className="sm:hidden -mx-8 ">
+    <Slider {...sliderSettings}>
+        {images.map(({ id, public_id, format, blurDataUrl }) => (
+            <div key={id} className="w-full h-[300px] ">
+                <Image
+                    alt="Next.js Conf photo"
+                    className="w-full h-full object-cover"
+                    placeholder="blur"
+                    blurDataURL={blurDataUrl}
+                    src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
+                    width={720}
+                    height={480}
+                />
+            </div>
+        ))}
+    </Slider>
+</div>
+
                 <div className='max-w-3xl divide-y divide-solid'>
                     <div className='flex items-center justify-between'>
                         <div className="my-6">
