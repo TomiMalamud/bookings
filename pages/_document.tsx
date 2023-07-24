@@ -8,19 +8,19 @@ class MyDocument extends Document {
           <link rel="icon" href="/favicon.ico" />
           <meta
             name="description"
-            content="See pictures from Next.js Conf and the After Party."
+            content="Casa completa en Villa Carlos Paz · 20 personas · 4 dormitorios · 3 baños."
           />
-          <meta property="og:site_name" content="nextjsconf-pics.vercel.app" />
+          <meta property="og:site_name" content="www.perlaserrana.com" />
           <meta
             property="og:description"
-            content="See pictures from Next.js Conf and the After Party."
+            content="Casa en Centro de Carlos Paz con Pileta. Perla Serrana"
           />
-          <meta property="og:title" content="Next.js Conf 2022 Pictures" />
+          <meta property="og:title" content="Casa en Centro de Carlos Paz con Pileta. Perla Serrana" />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Next.js Conf 2022 Pictures" />
+          <meta name="twitter:title" content="Casa en Centro de Carlos Paz con Pileta. Perla Serrana" />
           <meta
             name="twitter:description"
-            content="See pictures from Next.js Conf and the After Party."
+            content="Casa en Centro de Carlos Paz con Pileta. Perla Serrana"
           />
         </Head>
         <body className=" antialiased">

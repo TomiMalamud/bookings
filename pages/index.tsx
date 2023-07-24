@@ -89,7 +89,7 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
             </Head>
             <Header />
             {/* Mobile image slider */}
-            <div className="sm:hidden">
+            <div className="sm:hidden w-full justify-center">
                     <Slider {...sliderSettings}>
                         {images.map(({ id, public_id, format, blurDataUrl }) => (
                             <div key={id} className="w-full h-[300px] ">
