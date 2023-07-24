@@ -61,7 +61,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 export async function getStaticPaths() {
   const results = await cloudinary.v2.search
     .expression(`folder:Rivadavia/*`)
-    .sort_by('public_id', 'desc')
+    .sort_by('public_id', 'asc')
     .max_results(400)
     .execute()
 
