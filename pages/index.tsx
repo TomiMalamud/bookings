@@ -48,10 +48,17 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
 
     useEffect(() => {
         // This effect keeps track of the last viewed photo in the modal to keep the index page in sync when the user navigates back
-        if (lastViewedPhoto && !photoId) {
+        if (lastViewedPhoto && !photoId && lastViewedPhotoRef.current) { // Check if lastViewedPhotoRef.current exists
             lastViewedPhotoRef.current.scrollIntoView({ block: 'center' })
             setLastViewedPhoto(null)
         }
+
+        return () => {
+            // Cleanup function to remove the scroll effect when the component is unmounted
+            if (lastViewedPhotoRef.current) {
+                lastViewedPhotoRef.current = null;
+            }
+        };
     }, [photoId, lastViewedPhoto, setLastViewedPhoto])
 
     return (
@@ -81,7 +88,7 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
                 <h1 className="text-2xl font-semibold mb-2">{property.title}</h1>
                 <h2 className="text-md mb-4">{property.location}</h2>
                 <div className="columns-1 rounded-lg overflow-clip grid grid-cols-3 gap-2 sm:columns-2 xl:columns-3 2xl:columns-4">
-                    {images.slice(0,6).map(({ id, public_id, format, blurDataUrl }, index) => (
+                    {images.slice(0, 6).map(({ id, public_id, format, blurDataUrl }, index) => (
                         <Link
                             key={id}
                             href={`?photoId=${id}`}
@@ -104,19 +111,15 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
                   25vw"
                             />
                             {index === 5 && (
-                                <div className="absolute right-6 bottom-6 flex items-center justify-center z-10">
-                                    <Link href="/rivadavia-fotos">
-                                        <button type="button" className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-900 hover:bg-gray-100">
-                                            <PhotoIcon className='h-4 w-4 mr-2'></PhotoIcon>
-                                            Mostrar todas las fotos
-                                        </button>
-                                    </Link>
-                                </div>
+                                <button type="button" className="absolute right-6 bottom-6 flex justify-center z-10 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-900 hover:bg-gray-100">
+                                    <PhotoIcon className='h-4 w-4 mr-2'></PhotoIcon>
+                                    Mostrar todas las fotos
+                                </button>
                             )}
                         </Link>
 
-                    ))}
 
+                    ))}
                 </div>
                 <div className='max-w-3xl divide-y divide-solid'>
                     <div className='flex items-center justify-between'>
@@ -162,9 +165,9 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
                         <button className='mt-7 mb-2 text-md underline' onClick={handleToggleShowMore}>
                             <span className='flex items-center'>
                                 {showMore ? 'Mostrar menos' : 'Mostrar más'}
-                                {showMore ? <ChevronUpIcon className='mx-2 h-4 w-4' /> : <ChevronDownIcon className='mx-2  h-4 w-4' />}</span>
+                                {showMore ? <ChevronUpIcon className='mx-2 h-4 w-4' /> : <ChevronDownIcon className='mx-2  h-4 w-4' />}
+                            </span>
                         </button>
-
                     </div>
                     <Beds beds={property.beds} />
                     <Items items={property.items} notItems={property.notItems} />
