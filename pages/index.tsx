@@ -52,7 +52,7 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
             </div>
         ),
     };
-    
+
     const lastViewedPhotoRef = useRef<HTMLAnchorElement>(null)
 
     const handleToggleShowMore = () => {
@@ -88,6 +88,24 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
                 />
             </Head>
             <Header />
+            {/* Mobile image slider */}
+            <div className="sm:hidden">
+                    <Slider {...sliderSettings}>
+                        {images.map(({ id, public_id, format, blurDataUrl }) => (
+                            <div key={id} className="w-full h-[300px] ">
+                                <Image
+                                    alt="Next.js Conf photo"
+                                    className="w-full h-full object-cover"
+                                    placeholder="blur"
+                                    blurDataURL={blurDataUrl}
+                                    src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
+                                    width={720}
+                                    height={480}
+                                />
+                            </div>
+                        ))}
+                    </Slider>
+                </div>
             <main className="mx-auto max-w-[1960px] p-7 sm:px-20">
                 {photoId && (
                     <Modal
@@ -99,6 +117,7 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
                 )}
                 <h1 className="text-2xl font-semibold mb-2">{property.title}</h1>
                 <h2 className="text-md mb-4">{property.location}</h2>
+                <hr className='sm:hidden'/>
                 <div className="hidden columns-1 rounded-lg overflow-clip sm:grid grid-cols-3 gap-2 sm:columns-2 xl:columns-3 2xl:columns-4">
                     {images.slice(0, 6).map(({ id, public_id, format, blurDataUrl }, index) => (
                         <Link
@@ -129,29 +148,8 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
                                 </button>
                             )}
                         </Link>
-
-
                     ))}
-                </div>
-{/* Mobile image slider */}
-<div className="sm:hidden -mx-8 ">
-    <Slider {...sliderSettings}>
-        {images.map(({ id, public_id, format, blurDataUrl }) => (
-            <div key={id} className="w-full h-[300px] ">
-                <Image
-                    alt="Next.js Conf photo"
-                    className="w-full h-full object-cover"
-                    placeholder="blur"
-                    blurDataURL={blurDataUrl}
-                    src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
-                    width={720}
-                    height={480}
-                />
-            </div>
-        ))}
-    </Slider>
-</div>
-
+                </div>            
                 <div className='max-w-3xl divide-y divide-solid'>
                     <div className='flex items-center justify-between'>
                         <div className="my-6">
