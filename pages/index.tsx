@@ -15,6 +15,7 @@ import Items from '../components/Items';
 import Beds from '../components/Beds';
 import Location from '../components/Location';
 import Info from '../components/Info';
+import { ChevronDownIcon, ChevronUpIcon, PhotoIcon } from '@heroicons/react/24/outline';
 
 const property = {
     title: 'Casa en Centro de Carlos Paz Pileta',
@@ -79,41 +80,50 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
 
                 <h1 className="text-2xl font-semibold mb-2">{property.title}</h1>
                 <h2 className="text-md mb-4">{property.location}</h2>
-                    <div className="columns-1  rounded-lg overflow-clip grid grid-cols-3 gap-2 sm:columns-2 xl:columns-3 2xl:columns-4">
-                        {images.map(({ id, public_id, format, blurDataUrl }, index) => (
-                            <Link
-                                key={id}
-                                href={`?photoId=${id}`}
-                                ref={id === Number(lastViewedPhoto) ? lastViewedPhotoRef : null}
-                                shallow
-                                className="after:content group relative block w-full after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight"
-                            >
-                                <Image
-                                    alt="Next.js Conf photo"
-                                    className="transform object-cover aspect-video brightness-110 transition will-change-auto group-hover:brightness-90"
-                                    style={{ transform: 'translate3d(0, 0, 0)' }}
-                                    placeholder="blur"
-                                    blurDataURL={blurDataUrl}
-                                    src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
-                                    width={720}
-                                    height={480}
-                                    sizes="(max-width: 640px) 100vw,
+                <div className="columns-1 rounded-lg overflow-clip grid grid-cols-3 gap-2 sm:columns-2 xl:columns-3 2xl:columns-4">
+                    {images.slice(0,6).map(({ id, public_id, format, blurDataUrl }, index) => (
+                        <Link
+                            key={id}
+                            href={`?photoId=${id}`}
+                            ref={id === Number(lastViewedPhoto) ? lastViewedPhotoRef : null}
+                            shallow
+                            className="after:content group relative block w-full after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight"
+                        >
+                            <Image
+                                alt="Next.js Conf photo"
+                                className="transform object-cover aspect-video brightness-110 transition will-change-auto group-hover:brightness-90"
+                                style={{ transform: 'translate3d(0, 0, 0)' }}
+                                placeholder="blur"
+                                blurDataURL={blurDataUrl}
+                                src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
+                                width={720}
+                                height={480}
+                                sizes="(max-width: 640px) 100vw,
                   (max-width: 1280px) 50vw,
                   (max-width: 1536px) 33vw,
                   25vw"
-                                />
-                                
-                            </Link>
-                            
-                        ))}
-                        
+                            />
+                            {index === 5 && (
+                                <div className="absolute right-6 bottom-6 flex items-center justify-center z-10">
+                                    <Link href="/rivadavia-fotos">
+                                        <button type="button" className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-900 hover:bg-gray-100">
+                                            <PhotoIcon className='h-4 w-4 mr-2'></PhotoIcon>
+                                            Mostrar todas las fotos
+                                        </button>
+                                    </Link>
+                                </div>
+                            )}
+                        </Link>
+
+                    ))}
+
                 </div>
                 <div className='max-w-3xl divide-y divide-solid'>
                     <div className='flex items-center justify-between'>
-                    <div className="my-6">
-                        <p className="text-xl font-semibold">Alojamiento entero. Anfitriona: Carina</p>
-                        <p>20 huéspedes · 4 dormitorios · 19 camas · 3 baños</p>
-                    </div>
+                        <div className="my-6">
+                            <p className="text-xl font-semibold">Alojamiento entero. Anfitriona: Carina</p>
+                            <p>20 huéspedes · 4 dormitorios · 19 camas · 3 baños</p>
+                        </div>
                     </div>
                     <div className="py-8">
                         {showMore ? (
@@ -123,13 +133,6 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
                                 <br /><br />
                                 Queda a 5 cuadras del centro, donde están los mejores restaurantes,
                                 y también queda a pocos minutos de la costanera del lago San Roque.
-                            </p>
-                        ) : (
-                            <p className="prose">
-                                Casa con pileta y hermosa vista a toda la ciudad de Villa Carlos Paz. Está equipada y pensada especialmente para grupos grandes de 16 a 20 personas.
-                                <br /><br />
-
-                                Queda a 5 cuadras del centro, donde están los mejores restaurantes, y también queda a pocos minutos de la costanera del lago San Roque.
                                 <br /><br />
 
                                 Tiene estacionamiento para dos autos. El barrio donde está ubicada es residencial, está habitado principalmente por personas de más de 50 años, las calles son anchas para estacionar en ambas manos de forma segura.                            <br /><br />
@@ -147,7 +150,21 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
                                 <strong>Acceso de los huéspedes<br /></strong>
                                 La totalidad de la casa es accesible, exceptuando un departamento ubicado en el patio trasero que permanece cerrado. De ser útil, se puede alquilar por un precio extra. Está al frente de la pileta.
                             </p>
+                        ) : (
+                            <p className="prose">
+                                Casa con pileta y hermosa vista a toda la ciudad de Villa Carlos Paz.
+                                Está equipada y pensada especialmente para grupos grandes de 16 a 20 personas.
+                                <br /><br />
+                                Queda a 5 cuadras del centro, donde están los mejores restaurantes,
+                                y también queda a pocos minutos de la costanera del lago San Roque.
+                            </p>
                         )}
+                        <button className='mt-7 mb-2 text-md underline' onClick={handleToggleShowMore}>
+                            <span className='flex items-center'>
+                                {showMore ? 'Mostrar menos' : 'Mostrar más'}
+                                {showMore ? <ChevronUpIcon className='mx-2 h-4 w-4' /> : <ChevronDownIcon className='mx-2  h-4 w-4' />}</span>
+                        </button>
+
                     </div>
                     <Beds beds={property.beds} />
                     <Items items={property.items} notItems={property.notItems} />
@@ -165,7 +182,7 @@ export async function getStaticProps() {
     const results = await cloudinary.v2.search
         .expression(`folder:Rivadavia/*`)
         .sort_by('public_id', 'asc')
-        .max_results(6)
+        .max_results(40)
         .execute()
     let reducedResults: ImageProps[] = []
 
