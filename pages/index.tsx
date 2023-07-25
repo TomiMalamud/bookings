@@ -80,11 +80,11 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
                 <title>Fotos de Casa Centro Villa Carlos Paz</title>
                 <meta
                     property="og:image"
-                    content="https://perlaserrana.com.ar/og-image.png"
+                    content="https://www.perlaserrana.com.ar/og-image.png"
                 />
                 <meta
                     name="twitter:image"
-                    content="https://perlaserrana.com.ar/og-image.png"
+                    content="https://www.perlaserrana.com.ar/og-image.png"
                 />
             </Head>
             <Header />
