@@ -1,5 +1,4 @@
 import Document, { Head, Html, Main, NextScript } from 'next/document'
-
 class MyDocument extends Document {
   render() {
     return (
@@ -23,7 +22,8 @@ class MyDocument extends Document {
             content="Casa en Centro de Carlos Paz con Pileta. Perla Serrana"
           />
         </Head>
-        <body className=" antialiased">
+        
+        <body className="antialiased">
           <Main />
           <NextScript />
         </body>

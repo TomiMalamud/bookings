@@ -23,10 +23,9 @@ import {
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import WhatsApp from "../components/WhatsApp";
-
+import WhatsApp from '../components/WhatsApp'
 const property = {
-  title: "Casa en Centro de Carlos Paz Pileta",
+  title: "Casa en de Carlos Paz Pileta",
   location: "Villa Carlos Paz, Córdoba, Argentina",
   locationDescription:
     "Barrio residencial, principalmente habitado por personas de más de 50 años. Tranquilo, con amplia separación entre veredas. Es seguro y se puede estacionar en la calle sin problemas.",
@@ -60,7 +59,7 @@ const property = {
   ],
 };
 
-const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
+const Donizetti: NextPage = ({ images }: { images: ImageProps[] }) => {
   const router = useRouter();
   const { photoId } = router.query;
   const [lastViewedPhoto, setLastViewedPhoto] = useLastViewedPhoto();
@@ -108,7 +107,7 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
   return (
     <>
       <Head>
-        <title>Fotos de Casa Centro Villa Carlos Paz</title>
+        <title>Fotos de Casa Villa Carlos Paz con pileta</title>
         <meta
           property="og:image"
           content="https://www.perlaserrana.com.ar/og-image.png"
@@ -125,7 +124,7 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
           {images.map(({ id, public_id, format, blurDataUrl }) => (
             <div key={id} className="w-full h-[300px] ">
               <Image
-                alt="Foto de Casa en Centro de Villa Carlos Paz"
+                alt="Casa Donizetti"
                 className="w-full h-full object-cover"
                 placeholder="blur"
                 blurDataURL={blurDataUrl}
@@ -161,7 +160,7 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
                 className="after:content group relative block w-full after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight"
               >
                 <Image
-                  alt="Casa en Centro de Carlos Paz con pileta"
+                  alt="Casa Donizetti"
                   className="transform object-cover aspect-video brightness-110 transition will-change-auto group-hover:brightness-90"
                   style={{ transform: "translate3d(0, 0, 0)" }}
                   placeholder="blur"
@@ -192,20 +191,18 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
               <p className="text-xl font-semibold">
                 Alojamiento entero. Anfitriona: Carina
               </p>
-              <p>20 huéspedes · 4 dormitorios · 19 camas · 3 baños</p>
+              <p>10 huéspedes · 4 dormitorios · 7 camas · 3 baños</p>
             </div>
           </div>
           <div className="py-8">
             {showMore ? (
               <p className="prose">
-                Casa con pileta y hermosa vista a toda la ciudad de Villa Carlos
+                Casa con pileta y hermosa vista a las sierras de Villa Carlos
                 Paz. Está equipada y pensada especialmente para grupos grandes
-                de 16 a 20 personas.
+                de 6 a 10 personas.
                 <br />
                 <br />
-                Queda a 5 cuadras del centro, donde están los mejores
-                restaurantes, y también queda a pocos minutos de la costanera
-                del lago San Roque.
+                Queda a 5 minutos en auto del centro viejo. 
                 <br />
                 <br />
                 Tiene estacionamiento para dos autos. El barrio donde está
@@ -249,14 +246,12 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
               </p>
             ) : (
               <p className="prose">
-                Casa con pileta y hermosa vista a toda la ciudad de Villa Carlos
+                Casa con pileta y hermosa vista a las sierras de Villa Carlos
                 Paz. Está equipada y pensada especialmente para grupos grandes
-                de 16 a 20 personas.
+                de 6 a 10 personas.
                 <br />
                 <br />
-                Queda a 5 cuadras del centro, donde están los mejores
-                restaurantes, y también queda a pocos minutos de la costanera
-                del lago San Roque.
+                Queda a 5 minutos en auto del centro viejo. 
               </p>
             )}
             <button
@@ -283,12 +278,16 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
           />
           <Info />
         </div>
+        <div className="pt-2 sm:pt-4 mb-4">
+          <h2 className="font-bold text-lg sm:text-2xl mb-2">Escribinos 👇</h2>
+          <WhatsApp />
+          </div>
       </main>
     </>
   );
 };
 
-export default Rivadavia;
+export default Donizetti;
 
 export async function getStaticProps() {
   const results = await cloudinary.v2.search
