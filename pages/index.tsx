@@ -17,7 +17,7 @@ import Info from "../components/Info";
 import {
   ChevronDownIcon,
   ChevronUpIcon,
-  PhotoIcon,
+  PhotoIcon
 } from "@heroicons/react/24/outline";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -37,7 +37,7 @@ const property = {
     "3 camas marineras",
     "1 cama de dos plazas y 1 cama marinera",
     "2 camas marineras",
-    "3 camas marineras",
+    "3 camas marineras"
   ],
   items: [
     "Vista a las montañas",
@@ -48,15 +48,15 @@ const property = {
     "Estacionamiento gratis en la propiedad",
     "Pileta De uso privado",
     "Se permiten mascotas",
-    "Cámaras de seguridad en la propiedad",
+    "Cámaras de seguridad en la propiedad"
   ],
   notItems: [
     "Toallones",
     "Juego de Sábanas",
     "Shampoo y acondicionador",
     "Secador de pelo",
-    "Lavarropas",
-  ],
+    "Lavarropas"
+  ]
 };
 
 const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
@@ -79,7 +79,7 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
           activeSlide + 1
         } / ${dots.length}`}</p>
       </div>
-    ),
+    )
   };
 
   const lastViewedPhotoRef = useRef<HTMLAnchorElement>(null);
@@ -118,20 +118,28 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
         />
       </Head>
       {/* Mobile image slider */}
-      <div className="sm:hidden w-full justify-center">
+      <div className="sm:hidden w-full overflow-hidden justify-center">
         <Slider {...sliderSettings}>
           {images.map(({ id, public_id, format, blurDataUrl }) => (
-            <div key={id} className="w-full h-[300px] ">
-              <Image
-                alt="Foto de Casa en Centro de Villa Carlos Paz"
-                className="w-full h-full object-cover"
-                placeholder="blur"
-                blurDataURL={blurDataUrl}
-                src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
-                width={720}
-                height={480}
-              />
-            </div>
+            <Link
+              key={id}
+              href={`?photoId=${id}`}
+              ref={id === Number(lastViewedPhoto) ? lastViewedPhotoRef : null}
+              shallow
+              className="after:content group relative block w-full after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight"
+            >
+              <div key={id} className="w-full h-[300px] ">
+                <Image
+                  alt="Foto de Casa en Centro de Villa Carlos Paz"
+                  className="w-full h-full object-cover"
+                  placeholder="blur"
+                  blurDataURL={blurDataUrl}
+                  src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
+                  width={720}
+                  height={480}
+                />
+              </div>{" "}
+            </Link>
           ))}
         </Slider>
       </div>
@@ -303,7 +311,7 @@ export async function getStaticProps() {
       height: result.height,
       width: result.width,
       public_id: result.public_id,
-      format: result.format,
+      format: result.format
     });
     i++;
   }
@@ -319,7 +327,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      images: reducedResults,
-    },
+      images: reducedResults
+    }
   };
 }
