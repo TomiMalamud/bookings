@@ -117,7 +117,6 @@ const Donizetti: NextPage = ({ images }: { images: ImageProps[] }) => {
           content="https://www.perlaserrana.com.ar/og-image.png"
         />
       </Head>
-      <Header />
       {/* Mobile image slider */}
       <div className="sm:hidden w-full justify-center">
         <Slider {...sliderSettings}>

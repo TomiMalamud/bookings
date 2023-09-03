@@ -10,7 +10,6 @@ import cloudinary from "../utils/cloudinary";
 import getBase64ImageUrl from "../utils/generateBlurPlaceholder";
 import type { ImageProps } from "../utils/types";
 import { useLastViewedPhoto } from "../utils/useLastViewedPhoto";
-import Header from "../components/Header";
 import Items from "../components/Items";
 import Beds from "../components/Beds";
 import Location from "../components/Location";
@@ -118,7 +117,6 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
           content="https://www.perlaserrana.com.ar/og-image.png"
         />
       </Head>
-      <Header />
       {/* Mobile image slider */}
       <div className="sm:hidden w-full justify-center">
         <Slider {...sliderSettings}>

@@ -23,10 +23,16 @@ export default function Modal({
   const [curIndex, setCurIndex] = useState(index)
 
   function handleClose() {
-    router.push('/', undefined, { shallow: true })
-    onClose()
+    // Remove the photoId query parameter from the URL
+    const currentPath = router.pathname.split('/p/')[0];
+    const currentAsPath = router.asPath.split('?')[0].split('/p/')[0];
+    router.push(currentPath, currentAsPath, { shallow: true });
+  
+    // Call the onClose prop if it's provided
+    onClose?.();
   }
-
+  
+  
   function changePhotoId(newVal: number) {
     if (newVal > index) {
       setDirection(1)
