@@ -10,6 +10,8 @@ export default function Location({location, locationDescription, locationUrl, mo
             allowFullScreen={true}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
+            title="map"
+            className="rounded-lg sm:rounded-xl"
         ></iframe>
         <div className="pt-8">
             <h3 className="font-medium text-md mb-4">{location}</h3>

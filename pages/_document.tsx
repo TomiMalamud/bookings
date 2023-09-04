@@ -1,11 +1,11 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import Header from "../components/Header";
-import WhatsApp from "../components/WhatsApp";
+import Footer from "../components/Footer";
 
 class MyDocument extends Document {
   render() {
     return (
-      <Html lang="en">
+      <Html lang="es">
         <Head>
           <link rel="icon" href="/favicon.ico" />
           <meta
@@ -36,13 +36,7 @@ class MyDocument extends Document {
           <Main />
           <NextScript />
         </body>
-        <footer>
-          <div className="w-full mx-auto px-6 py-3 justify-center text-center">
-            <h3>Escribinos👇</h3>
-            <WhatsApp />
-            <p>Fechas disponibles durante todo el año</p>
-          </div>
-        </footer>
+        <Footer />
       </Html>
     );
   }
