@@ -1,4 +1,4 @@
-// Incluye el banner de PreViaje 5
+import Image from "next/image";
 export default function Banner() {
   return (
     <div className="relative justify-center isolate flex items-center gap-x-6 overflow-hidden bg-gray-50 px-6 py-2.5 sm:px-3.5">
@@ -29,7 +29,7 @@ export default function Banner() {
       <div className="text-center flex items-center">
         <div className="flex">
           <span className="sr-only">PreViaje 5</span>
-          <img className="h-5 w-auto mr-2" src="/previaje.svg" alt="PreViaje 5" />
+          <Image height={16.67} width={75} className="mr-2" src="/previaje.svg" alt="PreViaje 5" />
         </div>
         <p className="text-sm flex text-gray-800">
           Somos prestadores oficiales. {" "}

@@ -279,8 +279,6 @@ const PropertyPage: NextPage<Props> = ({ property, images }) => {
         images={images}
         activeSlide={activeSlide}
         setActiveSlide={setActiveSlide}
-        lastViewedPhoto={lastViewedPhoto}
-        setLastViewedPhoto={setLastViewedPhoto}
       />
       <main className="mx-auto max-w-[1960px] p-7 sm:px-20">
         {photoId && (

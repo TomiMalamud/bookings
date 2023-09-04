@@ -45,10 +45,15 @@ const MobileSlider = ({
                 alt="Foto de Casa en Centro de Villa Carlos Paz"
                 className="w-full h-full object-cover"
                 placeholder="blur"
+                priority={true}
                 blurDataURL={blurDataUrl}
                 src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
                 width={720}
                 height={480}
+                sizes="(max-width: 640px) 100vw,
+                (max-width: 1280px) 50vw,
+                (max-width: 1536px) 33vw,
+                25vw"
               />
             </div>
           </Link>
