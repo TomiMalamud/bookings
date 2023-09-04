@@ -19,9 +19,7 @@ import {
   ChevronUpIcon,
   PhotoIcon
 } from "@heroicons/react/24/outline";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import MobileSlider from "../components/MobileSlider";
 
 const property = {
   title: "Casa en Centro de Carlos Paz Pileta",
@@ -65,22 +63,6 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
   const [showMore, setShowMore] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
 
-  const sliderSettings = {
-    dots: true,
-    lazyLoad: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    afterChange: (current) => setActiveSlide(current),
-    appendDots: (dots) => (
-      <div>
-        <p className="text-white bg-gray-900/60 px-2 font-semibold py-1 text-center justify-end absolute right-7 -mt-20 rounded-md text-xs w-18">{`${
-          activeSlide + 1
-        } / ${dots.length}`}</p>
-      </div>
-    )
-  };
-
   const lastViewedPhotoRef = useRef<HTMLAnchorElement>(null);
 
   const handleToggleShowMore = () => {
@@ -116,32 +98,13 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
           content="https://www.perlaserrana.com.ar/og-image.png"
         />
       </Head>
-      {/* Mobile image slider */}
-      <div className="sm:hidden w-full overflow-hidden justify-center">
-        <Slider {...sliderSettings}>
-          {images.map(({ id, public_id, format, blurDataUrl }) => (
-            <Link
-              key={id}
-              href={`?photoId=${id}`}
-              ref={id === Number(lastViewedPhoto) ? lastViewedPhotoRef : null}
-              shallow
-              className="after:content group relative block w-full after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight"
-            >
-              <div key={id} className="w-full h-[300px] ">
-                <Image
-                  alt="Foto de Casa en Centro de Villa Carlos Paz"
-                  className="w-full h-full object-cover"
-                  placeholder="blur"
-                  blurDataURL={blurDataUrl}
-                  src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
-                  width={720}
-                  height={480}
-                />
-              </div>{" "}
-            </Link>
-          ))}
-        </Slider>
-      </div>
+      <MobileSlider
+        images={images}
+        activeSlide={activeSlide}
+        setActiveSlide={setActiveSlide}
+        lastViewedPhoto={lastViewedPhoto}
+        setLastViewedPhoto={setLastViewedPhoto}
+      />
       <main className="mx-auto max-w-[1960px] p-7 sm:px-20">
         {photoId && (
           <Modal
@@ -150,7 +113,7 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
               setLastViewedPhoto(photoId);
             }}
           />
-        )}         
+        )}
 
         <h1 className="text-2xl font-semibold mb-2">{property.title}</h1>
         <h2 className="text-md mb-4">{property.location}</h2>
@@ -202,69 +165,7 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
             </div>
           </div>
           <div className="py-8">
-            {showMore ? (
-              <p className="prose">
-                Casa con pileta y hermosa vista a toda la ciudad de Villa Carlos
-                Paz. Está equipada y pensada especialmente para grupos grandes
-                de 16 a 20 personas.
-                <br />
-                <br />
-                Queda a 5 cuadras del centro, donde están los mejores
-                restaurantes, y también queda a pocos minutos de la costanera
-                del lago San Roque.
-                <br />
-                <br />
-                Tiene estacionamiento para dos autos. El barrio donde está
-                ubicada es residencial, está habitado principalmente por
-                personas de más de 50 años, las calles son anchas para
-                estacionar en ambas manos de forma segura. <br />
-                <br />
-                <strong>
-                  El alojamiento
-                  <br />
-                </strong>
-                La casa en su interior tiene 4 dormitorios, y la distribución de
-                camas es la siguiente:
-                <br />
-                · 3 camas marineras (6 personas de capacidad en total)
-                <br />
-                · 1 cama de dos plazas y 1 cama marinera (duermen 4 personas)
-                <br />
-                · 2 camas marineras (duermen 4 personas)
-                <br />
-                · 3 camas marineras (duermen 6 personas)
-                <br />
-                <br />
-                Tiene Wi-Fi, calefacción, aire acondicionado en cada habitación
-                y living, cocina con sus utensillos.
-                <br />
-                <br />
-                Los demás espacios son comunes y siempre se alquila la totalidad
-                del alojamiento a un grupo familiar - no tenés que compartir
-                espacios con otras personas.
-                <br />
-                <br />
-                <strong>
-                  Acceso de los huéspedes
-                  <br />
-                </strong>
-                La totalidad de la casa es accesible, exceptuando un
-                departamento ubicado en el patio trasero que permanece cerrado.
-                De ser útil, se puede alquilar por un precio extra. Está al
-                frente de la pileta.
-              </p>
-            ) : (
-              <p className="prose">
-                Casa con pileta y hermosa vista a toda la ciudad de Villa Carlos
-                Paz. Está equipada y pensada especialmente para grupos grandes
-                de 16 a 20 personas.
-                <br />
-                <br />
-                Queda a 5 cuadras del centro, donde están los mejores
-                restaurantes, y también queda a pocos minutos de la costanera
-                del lago San Roque.
-              </p>
-            )}
+            
             <button
               className="mt-7 mb-2 text-md underline"
               onClick={handleToggleShowMore}

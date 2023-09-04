@@ -10,7 +10,6 @@ import cloudinary from "../utils/cloudinary";
 import getBase64ImageUrl from "../utils/generateBlurPlaceholder";
 import type { ImageProps } from "../utils/types";
 import { useLastViewedPhoto } from "../utils/useLastViewedPhoto";
-import Header from "../components/Header";
 import Items from "../components/Items";
 import Beds from "../components/Beds";
 import Location from "../components/Location";
@@ -24,8 +23,9 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import WhatsApp from '../components/WhatsApp'
+
 const property = {
-  title: "Casa en de Carlos Paz Pileta",
+  title: "Casa en Carlos Paz con Pileta",
   location: "Villa Carlos Paz, Córdoba, Argentina",
   locationDescription:
     "Barrio residencial, principalmente habitado por personas de más de 50 años. Tranquilo, con amplia separación entre veredas. Es seguro y se puede estacionar en la calle sin problemas.",
@@ -107,7 +107,7 @@ const Donizetti: NextPage = ({ images }: { images: ImageProps[] }) => {
   return (
     <>
       <Head>
-        <title>Fotos de Casa Villa Carlos Paz con pileta</title>
+        <title>{property.title}</title>
         <meta
           property="og:image"
           content="https://www.perlaserrana.com.ar/og-image.png"
