@@ -1,19 +1,17 @@
-import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import Slider from 'react-slick';
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import type { MobileSliderProps } from "../utils/types";
+import { useRouter } from "next/router";
 
-const MobileSlider = ({ 
-  images, 
-  activeSlide, 
-  setActiveSlide, 
-  lastViewedPhoto, 
-  setLastViewedPhoto 
+const MobileSlider = ({
+  images,
+  activeSlide,
+  setActiveSlide,
 }: MobileSliderProps): JSX.Element => {
-  
   const sliderSettings = {
     dots: true,
     lazyLoad: true,
@@ -23,10 +21,14 @@ const MobileSlider = ({
     afterChange: (current: number) => setActiveSlide(current),
     appendDots: (dots: React.ReactElement[]) => (
       <div>
-        <p className="text-white bg-gray-900/60 px-2 font-semibold py-1 text-center justify-end absolute right-7 -mt-20 rounded-md text-xs w-18">{`${activeSlide + 1} / ${dots.length}`}</p>
+        <p className="text-white bg-gray-900/60 px-2 font-semibold py-1 text-center justify-end absolute right-7 -mt-20 rounded-md text-xs w-18">{`${
+          activeSlide + 1
+        } / ${dots.length}`}</p>
       </div>
-    ),
+    )
   };
+  const router = useRouter();
+  const { slug } = router.query;
 
   return (
     <div className="sm:hidden w-full overflow-hidden justify-center">
@@ -34,7 +36,8 @@ const MobileSlider = ({
         {images.map(({ id, public_id, format, blurDataUrl }) => (
           <Link
             key={id}
-            href={`?photoId=${id}`}
+            href={`${slug}/?photoId=${id}`}
+            as={`${slug}?photoId=${id}`}
             shallow
           >
             <div key={id} className="w-full h-[300px]">

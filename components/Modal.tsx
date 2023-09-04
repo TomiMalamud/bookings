@@ -24,9 +24,9 @@ export default function Modal({
 
   function handleClose() {
     // Remove the photoId query parameter from the URL
-    const currentPath = router.pathname.split('/p/')[0];
-    const currentAsPath = router.asPath.split('?')[0].split('/p/')[0];
-    router.push(currentPath, currentAsPath, { shallow: true });
+    const currentPath = router.pathname; // No change needed, it should already represent the correct path
+    const currentAsPath = router.asPath.split('?')[0]; // Remove the query parameters to keep the original "as path"
+      router.push(currentPath, currentAsPath, { shallow: true });
   
     // Call the onClose prop if it's provided
     onClose?.();
@@ -42,9 +42,10 @@ export default function Modal({
     setCurIndex(newVal)
     router.push(
       {
+        pathname: '/alojamientos/[slug]',
         query: { photoId: newVal },
       },
-      `/p/${newVal}`,
+      `/alojamientos/${router.query.slug}/?photoId=${newVal}`,
       { shallow: true }
     )
   }

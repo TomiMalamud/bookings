@@ -22,7 +22,8 @@ import {
 import MobileSlider from "../components/MobileSlider";
 
 const property = {
-  title: "Casa en Centro de Carlos Paz Pileta",
+  id: "Rivadavia",
+  title: "Casa en Carlos Paz Pileta",
   location: "Villa Carlos Paz, Córdoba, Argentina",
   locationDescription:
     "Barrio residencial, principalmente habitado por personas de más de 50 años. Tranquilo, con amplia separación entre veredas. Es seguro y se puede estacionar en la calle sin problemas.",
@@ -55,6 +56,67 @@ const property = {
     "Lavarropas"
   ]
 };
+const ShortDescription = () => (
+  <>
+    Casa con pileta y hermosa vista a toda la ciudad de Villa Carlos Paz. Está
+    equipada y pensada especialmente para grupos grandes de 16 a 20 personas.
+    <br /> <br />
+    Queda a 5 cuadras del centro, donde están los mejores restaurantes, y
+    también queda a pocos minutos de la costanera del lago San Roque.
+  </>
+);
+const ExtendedDescription = () => (
+  <>
+    <br /> <br />
+    Tiene estacionamiento para dos autos. El barrio donde está ubicada es
+    residencial, está habitado principalmente por personas de más de 50 años,
+    las calles son anchas para estacionar en ambas manos de forma segura. <br /> <br />
+    <strong>El alojamiento</strong><br />
+    La casa en su interior tiene 4 dormitorios, y la distribución de camas es la
+    siguiente:
+    <br />
+    · 3 camas marineras (6 personas de capacidad en total)
+    <br />
+    · 1 cama de dos plazas y 1 cama marinera (duermen 4 personas)
+    <br />
+    · 2 camas marineras (duermen 4 personas)
+    <br />
+    · 3 camas marineras (duermen 6 personas)
+    <br />
+    <br />
+    Tiene Wi-Fi, calefacción, aire acondicionado en cada habitación y living,
+    cocina con sus utensillos.
+    <br />
+    <br />
+    Los demás espacios son comunes y siempre se alquila la totalidad del
+    alojamiento a un grupo familiar - no tenés que compartir espacios con otras
+    personas.
+    <br />
+    <br />
+    <strong>
+      Acceso de los huéspedes
+      <br />
+    </strong>
+    La totalidad de la casa es accesible, exceptuando un departamento ubicado en
+    el patio trasero que permanece cerrado. De ser útil, se puede alquilar por
+    un precio extra. Está al frente de la pileta.
+  </>
+);
+const ShowMoreToggle = ({ showMore, handleToggleShowMore }) => (
+  <button
+    className="mt-7 mb-2 text-md underline"
+    onClick={handleToggleShowMore}
+  >
+    <span className="flex items-center">
+      {showMore ? "Mostrar menos" : "Mostrar más"}
+      {showMore ? (
+        <ChevronUpIcon className="mx-2 h-4 w-4" />
+      ) : (
+        <ChevronDownIcon className="mx-2  h-4 w-4" />
+      )}
+    </span>
+  </button>
+);
 
 const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
   const router = useRouter();
@@ -62,12 +124,26 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
   const [lastViewedPhoto, setLastViewedPhoto] = useLastViewedPhoto();
   const [showMore, setShowMore] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
+  const handleToggleShowMore = () =>
+    setShowMore((prevShowMore) => !prevShowMore);
+
+  const sliderSettings = {
+    dots: true,
+    lazyLoad: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    afterChange: (current) => setActiveSlide(current),
+    appendDots: (dots) => (
+      <div>
+        <p className="text-white bg-gray-900/60 px-2 font-semibold py-1 text-center justify-end absolute right-7 -mt-20 rounded-md text-xs w-18">{`${
+          activeSlide + 1
+        } / ${dots.length}`}</p>
+      </div>
+    )
+  };
 
   const lastViewedPhotoRef = useRef<HTMLAnchorElement>(null);
-
-  const handleToggleShowMore = () => {
-    setShowMore((prevShowMore) => !prevShowMore);
-  };
 
   useEffect(() => {
     // This effect keeps track of the last viewed photo in the modal to keep the index page in sync when the user navigates back
@@ -165,20 +241,14 @@ const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
             </div>
           </div>
           <div className="py-8">
-            
-            <button
-              className="mt-7 mb-2 text-md underline"
-              onClick={handleToggleShowMore}
-            >
-              <span className="flex items-center">
-                {showMore ? "Mostrar menos" : "Mostrar más"}
-                {showMore ? (
-                  <ChevronUpIcon className="mx-2 h-4 w-4" />
-                ) : (
-                  <ChevronDownIcon className="mx-2  h-4 w-4" />
-                )}
-              </span>
-            </button>
+            <p className="prose">
+              <ShortDescription />
+              {showMore && <ExtendedDescription />}
+            </p>
+            <ShowMoreToggle
+              showMore={showMore}
+              handleToggleShowMore={handleToggleShowMore}
+            />
           </div>
           <Beds beds={property.beds} />
           <Items items={property.items} notItems={property.notItems} />
@@ -199,7 +269,7 @@ export default Rivadavia;
 
 export async function getStaticProps() {
   const results = await cloudinary.v2.search
-    .expression(`folder:Rivadavia/*`)
+    .expression(`folder:${property.id}/*`)
     .sort_by("public_id", "asc")
     .max_results(40)
     .execute();

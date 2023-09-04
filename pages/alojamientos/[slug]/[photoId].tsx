@@ -1,11 +1,11 @@
 import type { GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import Carousel from '../../components/Carousel'
-import getResults from '../../utils/cachedImages'
-import cloudinary from '../../utils/cloudinary'
-import getBase64ImageUrl from '../../utils/generateBlurPlaceholder'
-import type { ImageProps } from '../../utils/types'
+import Carousel from '../../../components/Carousel'
+import getResults from '../../../utils/cachedImages'
+import cloudinary from '../../../utils/cloudinary'
+import getBase64ImageUrl from '../../../utils/generateBlurPlaceholder'
+import type { ImageProps } from '../../../utils/types'
 
 const Home: NextPage = ({ currentPhoto }: { currentPhoto: ImageProps }) => {
   const router = useRouter()
@@ -67,7 +67,7 @@ export async function getStaticPaths() {
 
   let fullPaths = []
   for (let i = 0; i < results.resources.length; i++) {
-    fullPaths.push({ params: { photoId: i.toString() } })
+    fullPaths.push({ params: { photoId: i.toString(),slug: 'your-slug-here' } })
   }
 
   return {

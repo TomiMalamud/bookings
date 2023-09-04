@@ -17,15 +17,13 @@ import Info from "../components/Info";
 import {
   ChevronDownIcon,
   ChevronUpIcon,
-  PhotoIcon,
+  PhotoIcon
 } from "@heroicons/react/24/outline";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import WhatsApp from '../components/WhatsApp'
+import MobileSlider from "../components/MobileSlider";
 
 const property = {
-  title: "Casa en Carlos Paz con Pileta",
+  id: "donizetti",
+  title: "Casa en Centro de Carlos Paz Pileta",
   location: "Villa Carlos Paz, Córdoba, Argentina",
   locationDescription:
     "Barrio residencial, principalmente habitado por personas de más de 50 años. Tranquilo, con amplia separación entre veredas. Es seguro y se puede estacionar en la calle sin problemas.",
@@ -37,7 +35,7 @@ const property = {
     "3 camas marineras",
     "1 cama de dos plazas y 1 cama marinera",
     "2 camas marineras",
-    "3 camas marineras",
+    "3 camas marineras"
   ],
   items: [
     "Vista a las montañas",
@@ -48,45 +46,88 @@ const property = {
     "Estacionamiento gratis en la propiedad",
     "Pileta De uso privado",
     "Se permiten mascotas",
-    "Cámaras de seguridad en la propiedad",
+    "Cámaras de seguridad en la propiedad"
   ],
   notItems: [
     "Toallones",
     "Juego de Sábanas",
     "Shampoo y acondicionador",
     "Secador de pelo",
-    "Lavarropas",
-  ],
+    "Lavarropas"
+  ]
 };
+const ShortDescription = () => (
+  <>
+    Casa con pileta y hermosa vista a toda la ciudad de Villa Carlos Paz. Está
+    equipada y pensada especialmente para grupos grandes de 16 a 20 personas.
+    <br /> <br />
+    Queda a 5 cuadras del centro, donde están los mejores restaurantes, y
+    también queda a pocos minutos de la costanera del lago San Roque.
+  </>
+);
+const ExtendedDescription = () => (
+  <>
+    <br /> <br />
+    Tiene estacionamiento para dos autos. El barrio donde está ubicada es
+    residencial, está habitado principalmente por personas de más de 50 años,
+    las calles son anchas para estacionar en ambas manos de forma segura. <br /> <br />
+    <strong>El alojamiento</strong><br />
+    La casa en su interior tiene 4 dormitorios, y la distribución de camas es la
+    siguiente:
+    <br />
+    · 3 camas marineras (6 personas de capacidad en total)
+    <br />
+    · 1 cama de dos plazas y 1 cama marinera (duermen 4 personas)
+    <br />
+    · 2 camas marineras (duermen 4 personas)
+    <br />
+    · 3 camas marineras (duermen 6 personas)
+    <br />
+    <br />
+    Tiene Wi-Fi, calefacción, aire acondicionado en cada habitación y living,
+    cocina con sus utensillos.
+    <br />
+    <br />
+    Los demás espacios son comunes y siempre se alquila la totalidad del
+    alojamiento a un grupo familiar - no tenés que compartir espacios con otras
+    personas.
+    <br />
+    <br />
+    <strong>
+      Acceso de los huéspedes
+      <br />
+    </strong>
+    La totalidad de la casa es accesible, exceptuando un departamento ubicado en
+    el patio trasero que permanece cerrado. De ser útil, se puede alquilar por
+    un precio extra. Está al frente de la pileta.
+  </>
+);
+const ShowMoreToggle = ({ showMore, handleToggleShowMore }) => (
+  <button
+    className="mt-7 mb-2 text-md underline"
+    onClick={handleToggleShowMore}
+  >
+    <span className="flex items-center">
+      {showMore ? "Mostrar menos" : "Mostrar más"}
+      {showMore ? (
+        <ChevronUpIcon className="mx-2 h-4 w-4" />
+      ) : (
+        <ChevronDownIcon className="mx-2  h-4 w-4" />
+      )}
+    </span>
+  </button>
+);
 
-const Donizetti: NextPage = ({ images }: { images: ImageProps[] }) => {
+const Rivadavia: NextPage = ({ images }: { images: ImageProps[] }) => {
   const router = useRouter();
   const { photoId } = router.query;
   const [lastViewedPhoto, setLastViewedPhoto] = useLastViewedPhoto();
   const [showMore, setShowMore] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
-
-  const sliderSettings = {
-    dots: true,
-    lazyLoad: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    afterChange: (current) => setActiveSlide(current),
-    appendDots: (dots) => (
-      <div>
-        <p className="text-white bg-gray-900/60 px-2 font-semibold py-1 text-center justify-end absolute right-7 -mt-20 rounded-md text-xs w-18">{`${
-          activeSlide + 1
-        } / ${dots.length}`}</p>
-      </div>
-    ),
-  };
+  const handleToggleShowMore = () =>
+    setShowMore((prevShowMore) => !prevShowMore);
 
   const lastViewedPhotoRef = useRef<HTMLAnchorElement>(null);
-
-  const handleToggleShowMore = () => {
-    setShowMore((prevShowMore) => !prevShowMore);
-  };
 
   useEffect(() => {
     // This effect keeps track of the last viewed photo in the modal to keep the index page in sync when the user navigates back
@@ -117,24 +158,13 @@ const Donizetti: NextPage = ({ images }: { images: ImageProps[] }) => {
           content="https://www.perlaserrana.com.ar/og-image.png"
         />
       </Head>
-      {/* Mobile image slider */}
-      <div className="sm:hidden w-full justify-center">
-        <Slider {...sliderSettings}>
-          {images.map(({ id, public_id, format, blurDataUrl }) => (
-            <div key={id} className="w-full h-[300px] ">
-              <Image
-                alt="Casa Donizetti"
-                className="w-full h-full object-cover"
-                placeholder="blur"
-                blurDataURL={blurDataUrl}
-                src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
-                width={720}
-                height={480}
-              />
-            </div>
-          ))}
-        </Slider>
-      </div>
+      <MobileSlider
+        images={images}
+        activeSlide={activeSlide}
+        setActiveSlide={setActiveSlide}
+        lastViewedPhoto={lastViewedPhoto}
+        setLastViewedPhoto={setLastViewedPhoto}
+      />
       <main className="mx-auto max-w-[1960px] p-7 sm:px-20">
         {photoId && (
           <Modal
@@ -144,6 +174,7 @@ const Donizetti: NextPage = ({ images }: { images: ImageProps[] }) => {
             }}
           />
         )}
+
         <h1 className="text-2xl font-semibold mb-2">{property.title}</h1>
         <h2 className="text-md mb-4">{property.location}</h2>
         <hr className="sm:hidden" />
@@ -159,7 +190,7 @@ const Donizetti: NextPage = ({ images }: { images: ImageProps[] }) => {
                 className="after:content group relative block w-full after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight"
               >
                 <Image
-                  alt="Casa Donizetti"
+                  alt="Casa en Centro de Carlos Paz con pileta"
                   className="transform object-cover aspect-video brightness-110 transition will-change-auto group-hover:brightness-90"
                   style={{ transform: "translate3d(0, 0, 0)" }}
                   placeholder="blur"
@@ -190,82 +221,18 @@ const Donizetti: NextPage = ({ images }: { images: ImageProps[] }) => {
               <p className="text-xl font-semibold">
                 Alojamiento entero. Anfitriona: Carina
               </p>
-              <p>10 huéspedes · 4 dormitorios · 7 camas · 3 baños</p>
+              <p>20 huéspedes · 4 dormitorios · 19 camas · 3 baños</p>
             </div>
           </div>
           <div className="py-8">
-            {showMore ? (
-              <p className="prose">
-                Casa con pileta y hermosa vista a las sierras de Villa Carlos
-                Paz. Está equipada y pensada especialmente para grupos grandes
-                de 6 a 10 personas.
-                <br />
-                <br />
-                Queda a 5 minutos en auto del centro viejo. 
-                <br />
-                <br />
-                Tiene estacionamiento para dos autos. El barrio donde está
-                ubicada es residencial, está habitado principalmente por
-                personas de más de 50 años, las calles son anchas para
-                estacionar en ambas manos de forma segura. <br />
-                <br />
-                <strong>
-                  El alojamiento
-                  <br />
-                </strong>
-                La casa en su interior tiene 4 dormitorios, y la distribución de
-                camas es la siguiente:
-                <br />
-                · 3 camas marineras (6 personas de capacidad en total)
-                <br />
-                · 1 cama de dos plazas y 1 cama marinera (duermen 4 personas)
-                <br />
-                · 2 camas marineras (duermen 4 personas)
-                <br />
-                · 3 camas marineras (duermen 6 personas)
-                <br />
-                <br />
-                Tiene Wi-Fi, calefacción, aire acondicionado en cada habitación
-                y living, cocina con sus utensillos.
-                <br />
-                <br />
-                Los demás espacios son comunes y siempre se alquila la totalidad
-                del alojamiento a un grupo familiar - no tenés que compartir
-                espacios con otras personas.
-                <br />
-                <br />
-                <strong>
-                  Acceso de los huéspedes
-                  <br />
-                </strong>
-                La totalidad de la casa es accesible, exceptuando un
-                departamento ubicado en el patio trasero que permanece cerrado.
-                De ser útil, se puede alquilar por un precio extra. Está al
-                frente de la pileta.
-              </p>
-            ) : (
-              <p className="prose">
-                Casa con pileta y hermosa vista a las sierras de Villa Carlos
-                Paz. Está equipada y pensada especialmente para grupos grandes
-                de 6 a 10 personas.
-                <br />
-                <br />
-                Queda a 5 minutos en auto del centro viejo. 
-              </p>
-            )}
-            <button
-              className="mt-7 mb-2 text-md underline"
-              onClick={handleToggleShowMore}
-            >
-              <span className="flex items-center">
-                {showMore ? "Mostrar menos" : "Mostrar más"}
-                {showMore ? (
-                  <ChevronUpIcon className="mx-2 h-4 w-4" />
-                ) : (
-                  <ChevronDownIcon className="mx-2  h-4 w-4" />
-                )}
-              </span>
-            </button>
+            <p className="prose">
+              <ShortDescription />
+              {showMore && <ExtendedDescription />}
+            </p>
+            <ShowMoreToggle
+              showMore={showMore}
+              handleToggleShowMore={handleToggleShowMore}
+            />
           </div>
           <Beds beds={property.beds} />
           <Items items={property.items} notItems={property.notItems} />
@@ -277,20 +244,16 @@ const Donizetti: NextPage = ({ images }: { images: ImageProps[] }) => {
           />
           <Info />
         </div>
-        <div className="pt-2 sm:pt-4 mb-4">
-          <h2 className="font-bold text-lg sm:text-2xl mb-2">Escribinos 👇</h2>
-          <WhatsApp />
-          </div>
       </main>
     </>
   );
 };
 
-export default Donizetti;
+export default Rivadavia;
 
 export async function getStaticProps() {
   const results = await cloudinary.v2.search
-    .expression(`folder:Rivadavia/*`)
+    .expression(`folder:${property.id}/*`)
     .sort_by("public_id", "asc")
     .max_results(40)
     .execute();
@@ -303,7 +266,7 @@ export async function getStaticProps() {
       height: result.height,
       width: result.width,
       public_id: result.public_id,
-      format: result.format,
+      format: result.format
     });
     i++;
   }
@@ -319,7 +282,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      images: reducedResults,
-    },
+      images: reducedResults
+    }
   };
 }
