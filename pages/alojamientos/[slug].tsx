@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,9 +21,9 @@ import { useRouter } from "next/router";
 import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
 import dynamic from "next/dynamic";
 
-const Location = dynamic(() => import('../../components/Location'), {
-  loading: () => <p>Cargando...</p>,
-})
+const Location = dynamic(() => import("../../components/Location"), {
+  loading: () => <p>Cargando...</p>
+});
 
 type PropertyType = {
   title: string;
@@ -99,8 +99,7 @@ export const propertiesData = {
 
     **Acceso de los huéspedes**
     La totalidad de la casa es accesible, exceptuando un departamento ubicado en el patio trasero que permanece cerrado. De ser útil, se puede alquilar por un precio extra. Está al frente de la pileta.`
-  }
-,
+  },
   rivadavia: {
     id: "Rivadavia",
     title: "Casa en Centro de Carlos Paz Pileta",
@@ -238,11 +237,6 @@ const PropertyPage: NextPage<Props> = ({ property, images }) => {
   const handleToggleShowMore = () =>
     setShowMore((prevShowMore) => !prevShowMore);
 
-  const textWithBold = property.shortDescription.replace(
-    /\*\*(.*?)\*\*/g,
-    "<strong>$1</strong>"
-  );
-
   const lastViewedPhotoRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
@@ -275,11 +269,19 @@ const PropertyPage: NextPage<Props> = ({ property, images }) => {
           content="https://www.perlaserrana.com.ar/og-image.png"
         />
       </Head>
-      <MobileSlider
-        images={images}
-        activeSlide={activeSlide}
-        setActiveSlide={setActiveSlide}
-      />
+      <Suspense
+        fallback={
+          <div className="animate-pulse">
+            <div className="w-full h-[302px] bg-gray-300" />
+          </div>
+        }
+      >
+        <MobileSlider
+          images={images}
+          activeSlide={activeSlide}
+          setActiveSlide={setActiveSlide}
+        />
+      </Suspense>
       <main className="mx-auto max-w-[1960px] p-7 sm:px-20">
         {photoId && (
           <Modal
@@ -337,23 +339,38 @@ const PropertyPage: NextPage<Props> = ({ property, images }) => {
               <p className="text-xl font-semibold">
                 Alojamiento entero. Anfitriona: Carina
               </p>
-              <p>{property.maxCapacity} huéspedes · {property.beds.length} dormitorios · 19 camas · 3 baños</p>
+              <p>
+                {property.maxCapacity} huéspedes · {property.beds.length}{" "}
+                dormitorios · 19 camas · 3 baños
+              </p>
             </div>
           </div>
           <div className="py-8">
-  <div className="prose whitespace-pre-line"
-    dangerouslySetInnerHTML={{ __html: property.shortDescription.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")}}
-  />
-  {showMore && (
-    <div className="prose whitespace-pre-line"
-      dangerouslySetInnerHTML={{ __html: property.completeDescription.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")}}
-    />
-  )}
-  <ShowMoreToggle
-    showMore={showMore}
-    handleToggleShowMore={handleToggleShowMore}
-  />
-</div>
+            <div
+              className="prose whitespace-pre-line"
+              dangerouslySetInnerHTML={{
+                __html: property.shortDescription.replace(
+                  /\*\*(.*?)\*\*/g,
+                  "<strong>$1</strong>"
+                )
+              }}
+            />
+            {showMore && (
+              <div
+                className="prose whitespace-pre-line"
+                dangerouslySetInnerHTML={{
+                  __html: property.completeDescription.replace(
+                    /\*\*(.*?)\*\*/g,
+                    "<strong>$1</strong>"
+                  )
+                }}
+              />
+            )}
+            <ShowMoreToggle
+              showMore={showMore}
+              handleToggleShowMore={handleToggleShowMore}
+            />
+          </div>
 
           <Beds beds={property.beds} />
           <Items items={property.items} notItems={property.notItems} />

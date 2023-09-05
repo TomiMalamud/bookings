@@ -31,12 +31,12 @@ class MyDocument extends Document {
             content="Casa en Centro de Carlos Paz con Pileta. Perla Serrana"
           />
         </Head>
-        <Header />
         <body className="antialiased">
+          <Header />
           <Main />
+          <Footer />
           <NextScript />
         </body>
-        <Footer />
       </Html>
     );
   }
