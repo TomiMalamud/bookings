@@ -38,7 +38,7 @@ export default function Location({location, locationDescription, locationUrl, mo
         ></iframe>
       )}
 
-      <div className="pt-8">
+      <div className="pt-8 prose">
         <h3 className="font-medium text-md mb-4">{location}</h3>
         <p>{locationDescription}</p>
         <br />
