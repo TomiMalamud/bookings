@@ -58,18 +58,18 @@ export const propertiesData = {
     beds: [
       "1 cama de dos plazas y 1 cama de una plaza",
       "1 cama de dos plazas y 1 cama de una plaza",
-      "2 camas de una plaza",
-      "1 camas de dos plazas"
+      "2 camas de una plaza (en el living)",
+      "1 cama de dos plazas"
     ],
-    maxCapacity: 12,
+    maxCapacity: 10,
     items: [
       "Vista a las montañas",
       "Aire acondicionado",
       "Calefacción",
       "Cocina y utensillos",
       "Wifi",
-      "Estacionamiento gratis en la propiedad",
-      "Pileta De uso privado",
+      "Estacionamiento para 2 vehículos",
+      "Pileta de uso privado",
       "Se permiten mascotas",
       "Cámaras de seguridad en la propiedad"
     ],
@@ -80,25 +80,22 @@ export const propertiesData = {
       "Secador de pelo",
       "Lavarropas"
     ],
-    shortDescription: `Casa con pileta y hermosa vista a toda la ciudad de Villa Carlos Paz. Está equipada y pensada especialmente para grupos grandes de 16 a 20 personas.
+    shortDescription: `Casa con pileta y hermosa vista a las sierras de Villa Carlos Paz. Está equipada y pensada especialmente para grupos grandes de hasta 10 personas.
 
-    Queda a 5 cuadras del centro, donde están los mejores restaurantes, y también queda a pocos minutos de la costanera del lago San Roque.`,
+    Queda a 7 minutos del centro viejo, y a pocos minutos del río Cabalango. La casa está rodeada de almacenes y carnicerías.`,
     completeDescription: `
-    Tiene estacionamiento para dos autos. El barrio donde está ubicada es residencial, está habitado principalmente por personas de más de 50 años, las calles son anchas para estacionar en ambas manos de forma segura.
+    Tiene estacionamiento para dos autos. El barrio donde está ubicada es residencial, alejada del ruido de avenidas. Ideal para grupos jóvenes, o familias que disfruten del río.
 
     **El alojamiento**
-    La casa en su interior tiene 4 dormitorios, y la distribución de camas es la siguiente:
-    - 3 camas marineras (6 personas de capacidad en total)
-    - 1 cama de dos plazas y 1 cama marinera (duermen 4 personas)
-    - 2 camas marineras (duermen 4 personas)
-    - 3 camas marineras (duermen 6 personas)
+    La casa en su interior tiene 3 dormitorios, con el living también habilitado para dormir. La distribución de camas es la siguiente:
+    - 1 cama de dos plazas y 1 cama de una plaza
+    - 1 cama de dos plazas y 1 cama de una plaza
+    - 2 camas de una plaza (en el living)
+    - 1 cama de dos plazas
 
-    Tiene Wi-Fi, calefacción, aire acondicionado en cada habitación y living, cocina con sus utensillos.
+    Tiene Wi-Fi, calefacción, aire acondicionado en 2 de las habitaciones habitaciones y en el living, cocina con sus utensillos.
 
-    Los demás espacios son comunes y siempre se alquila la totalidad del alojamiento a un grupo familiar - no tenés que compartir espacios con otras personas.
-
-    **Acceso de los huéspedes**
-    La totalidad de la casa es accesible, exceptuando un departamento ubicado en el patio trasero que permanece cerrado. De ser útil, se puede alquilar por un precio extra. Está al frente de la pileta.`
+    Los demás espacios son comunes y siempre se alquila la totalidad del alojamiento a un grupo familiar - no tenés que compartir espacios con otras personas.`
   },
   rivadavia: {
     id: "Rivadavia",
@@ -148,7 +145,7 @@ export const propertiesData = {
     - 2 camas marineras (duermen 4 personas)
     - 3 camas marineras (duermen 6 personas)
 
-    Tiene Wi-Fi, calefacción, aire acondicionado en cada habitación y living, cocina con sus utensillos.
+    Tiene Wi-Fi, calefacción, aire acondicionado, cocina con sus utensillos.
 
     Los demás espacios son comunes y siempre se alquila la totalidad del alojamiento a un grupo familiar - no tenés que compartir espacios con otras personas.
 
@@ -260,14 +257,6 @@ const PropertyPage: NextPage<Props> = ({ property, images }) => {
     <>
       <Head>
         <title>{property.title}</title>
-        <meta
-          property="og:image"
-          content="https://www.perlaserrana.com.ar/og-image.png"
-        />
-        <meta
-          name="twitter:image"
-          content="https://www.perlaserrana.com.ar/og-image.png"
-        />
       </Head>
       <Suspense
         fallback={
