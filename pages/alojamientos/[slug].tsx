@@ -165,8 +165,8 @@ export const propertiesData = {
     moving:
       "Es posible manejarse en cualquier tipo de vehículo, sobre la ruta hay garitas de colectivo interurbano que conecta el complejo con Cosquín y Villa Carlos Paz.",
     beds: [
-      "7 huéspedes. 2 camas de dos plazas, 1 de una plaza y diván cama (duermen dos).",
-      "6 huéspedes. 2 camas de dos plazas y diván cama (duermen dos).",
+      "7 huéspedes. 2 camas de dos plazas, 3 de una plaza.",
+      "6 huéspedes. 2 camas de dos plazas y 2 de una plaza.",
       "5 huéspedes. 1 camas de dos plazas, 1 de una plaza y diván cama (duermen dos)."
     ],
     maxCapacity: 18,
