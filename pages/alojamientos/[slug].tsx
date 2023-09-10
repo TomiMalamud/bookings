@@ -12,6 +12,7 @@ import Items from "../../components/Items";
 import Beds from "../../components/Beds";
 import Info from "../../components/Info";
 import {
+  ArrowLeftIcon,
   ChevronDownIcon,
   ChevronUpIcon,
   PhotoIcon
@@ -20,6 +21,7 @@ import MobileSlider from "../../components/MobileSlider";
 import { useRouter } from "next/router";
 import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
 import dynamic from "next/dynamic";
+import Aparts from "../../components/Aparts";
 
 const Location = dynamic(() => import("../../components/Location"), {
   loading: () => <p>Cargando...</p>
@@ -63,7 +65,7 @@ export const propertiesData = {
     ],
     maxCapacity: 10,
     items: [
-      "Vista a las montañas",
+      "Vista a las sierras",
       "Aire acondicionado",
       "Calefacción",
       "Cocina y utensillos",
@@ -106,7 +108,7 @@ export const propertiesData = {
     locationUrl:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.7607430488174!2d-64.4892503246707!3d-31.42071739646025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x942d665bb602cdfd%3A0x1b4f40ce6b431ac!2sRivadavia%20365%2C%20X5152%20Villa%20Carlos%20Paz%2C%20C%C3%B3rdoba!5e0!3m2!1sen!2sar!4v1690131904725!5m2!1sen!2sar",
     moving:
-      "Es posible manejarse en cualquier tipo de vehículo, a sólo cinco cuadras se encuentran garitas de colectivo. La casa tiene cochera y además es posible estacionar en la calle, de ambas manos. Siempre hay lugar.",
+      "Es posible manejarse en cualquier tipo de vehículo, a sólo dos cuadras se encuentran garitas de colectivo. La casa tiene estacionamiento con media sombra para dos vehículos.",
     beds: [
       "3 camas marineras",
       "1 cama de dos plazas y 1 cama marinera",
@@ -115,7 +117,7 @@ export const propertiesData = {
     ],
     maxCapacity: 20,
     items: [
-      "Vista a las montañas",
+      "Vista a las sierras y a la ciudad",
       "Aire acondicionado",
       "Calefacción",
       "Cocina y utensillos",
@@ -151,6 +153,59 @@ export const propertiesData = {
 
     **Acceso de los huéspedes**
     La totalidad de la casa es accesible, exceptuando un departamento ubicado en el patio trasero que permanece cerrado. De ser útil, se puede alquilar por un precio extra. Está al frente de la pileta.`
+  },
+  sierras: {
+    id: "sierras",
+    title: "Sierras Apartamentos - Pileta",
+    location: "Villa Santa Cruz del Lago, Córdoba, Argentina",
+    locationDescription:
+      "Distancia justa a la ruta: sobre la ruta, suficientemente alejado como para no sentir molestias por los autos. A 15 minutos de Carlos Paz, y a 15 minutos de Cosquín. Muy cerca de ríos y balnearios.",
+    locationUrl:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3406.975691909325!2d-64.5315842!3d-31.359650000000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x942d6f7f4693048b%3A0x146779e8a1ae8197!2sSierras%20Apartamentos!5e0!3m2!1sen!2sar!4v1694314637555!5m2!1sen!2sar",
+    moving:
+      "Es posible manejarse en cualquier tipo de vehículo, sobre la ruta hay garitas de colectivo interurbano que conecta el complejo con Cosquín y Villa Carlos Paz.",
+    beds: [
+      "7 huéspedes. 2 camas de dos plazas, 1 de una plaza y diván cama (duermen dos).",
+      "6 huéspedes. 2 camas de dos plazas y diván cama (duermen dos).",
+      "5 huéspedes. 1 camas de dos plazas, 1 de una plaza y diván cama (duermen dos)."
+    ],
+    maxCapacity: 18,
+    items: [
+      "Vista a las sierras",
+      "Ventiladores",
+      "Calefacción a tiro balanceado",
+      "Cocina y utensillos",
+      "Wifi",
+      "Estacionamiento con media sombra en la propiedad",
+      "Pileta pa todo el complejo",
+      "Se permiten mascotas pequeñas",
+      "Cámaras de seguridad en la propiedad"
+    ],
+    notItems: [
+      "Toallones",
+      "Juego de Sábanas",
+      "Shampoo y acondicionador",
+      "Secador de pelo",
+      "Lavarropas"
+    ],
+    shortDescription: `Sierras Apartamentos es un complejo de tres departamentos, con pileta, asador, cochera media sombra y espacios compartidos.
+    
+    Es ideal para grupos de familias que quieran compartir unas vacaciones juntos, o pequeños grupos para cada departamento. 
+    `,
+    completeDescription: `
+    Además, cada persona puede disfrutar de las sierras cordobesas desde su departamento, saliendo a tomar unos mates frente a la pileta.
+    
+    Está sólo a 15 minutos de Villa Carlos Paz en auto, y pasan seguido colectivos que van hacia esta localidad de ser necesario. Además, está cerca de balnearios, ríos, y otras localidades como Tanti, Cosquín, Santa Maria de Punilla, y más.
+
+    **El alojamiento**
+    El complejo tiene 3 departamentos:
+    - Departamento 1: Capacidad para 7 personas
+    - Departamento 2: Capacidad para 6 personas
+    - Departamento 3: Capacidad para 5 personas
+
+    Tiene Wi-Fi, calefacción (tiro balanceado), ventiladores, cocina con sus utensillos.
+
+    Se comparte entre los departamentos la pileta, hay un chulengo y una parrilla, y cochera media sombra para cada departamento.`
   }
 };
 
@@ -258,6 +313,13 @@ const PropertyPage: NextPage<Props> = ({ property, images }) => {
       <Head>
         <title>{property.title}</title>
       </Head>
+      <Link
+        href="/"
+        aria-label="home"
+        className="sm:hidden mb-4 flex pt-4 px-4 items-center decoration-slate-300 hover:decoration-slate-600 underline underline-offset-4"
+      >
+        <ArrowLeftIcon className="h-3 w-3 mr-2 " /> Ver otros Alojamientos
+      </Link>
       <Suspense
         fallback={
           <div className="animate-pulse">
@@ -272,6 +334,14 @@ const PropertyPage: NextPage<Props> = ({ property, images }) => {
         />
       </Suspense>
       <main className="mx-auto max-w-[1960px] p-7 sm:px-20">
+        <Link
+          href="/"
+          aria-label="home"
+          className="sm:flex mb-4 hidden items-center decoration-slate-300 hover:decoration-slate-600 underline underline-offset-4"
+        >
+          <ArrowLeftIcon className="h-3 w-3 mr-2 " /> Ver otros Alojamientos
+        </Link>
+
         {photoId && (
           <Modal
             images={images}
@@ -360,8 +430,11 @@ const PropertyPage: NextPage<Props> = ({ property, images }) => {
               handleToggleShowMore={handleToggleShowMore}
             />
           </div>
-
-          <Beds beds={property.beds} />
+          {property.title !== "Sierras Apartamentos - Pileta" ? (
+            <Beds beds={property.beds} />
+          ) : (
+            <Aparts beds={property.beds} />
+          )}
           <Items items={property.items} notItems={property.notItems} />
           <Location
             location={property.location}

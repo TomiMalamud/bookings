@@ -2,12 +2,10 @@ import React from "react";
 import Link from "next/link";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 import WhatsApp from "./WhatsApp";
-import Banner from "./Banner";
 
 export default function Header() {
   return (
     <>
-      <Banner />
       <header className="top-0 z-50 flex items-center justify-between w-full h-16 px-4 sm:px-16 border-b shrink-0 ">
         <div className="font-bold text-slate-800">
           <Link href="/" className="flex items-center text-md">
