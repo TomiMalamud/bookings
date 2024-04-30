@@ -42,7 +42,7 @@ class MyDocument extends Document {
         <body className="antialiased">
           <Header />
           <Main />
-          <Footer />
+          {/*<Footer />*/}
           <NextScript />
         </body>
       </Html>

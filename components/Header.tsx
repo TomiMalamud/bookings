@@ -15,7 +15,7 @@ export default function Header() {
         </div>
         <div className="sm:flex items-center space-x-4">
           <span className="hidden sm:inline-flex">Escribinos 👉 </span>
-          <WhatsApp />
+          {/*<WhatsApp />*/}
         </div>
       </header>
     </>
