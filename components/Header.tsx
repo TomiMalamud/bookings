@@ -13,10 +13,10 @@ export default function Header() {
             Perla Serrana
           </Link>
         </div>
-        <div className="sm:flex items-center space-x-4">
+        {/*<div className="sm:flex items-center space-x-4">
           <span className="hidden sm:inline-flex">Escribinos 👉 </span>
-          {/*<WhatsApp />*/}
-        </div>
+          <WhatsApp />
+        </div>*/}
       </header>
     </>
   );
