@@ -33,6 +33,7 @@ type PropertyType = {
   locationDescription: string;
   locationUrl: string;
   moving: string;
+  beds_header:string;
   beds: string[];
   maxCapacity: number;
   items: string[];
@@ -57,6 +58,7 @@ export const propertiesData = {
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.950226609956!2d-64.52481312467091!3d-31.415497396207904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x942d661c2009e00d%3A0x487c9b60d157875!2sDonizetti%20260%2C%20Villa%20Carlos%20Paz%2C%20C%C3%B3rdoba!5e0!3m2!1sen!2sar!4v1693860248413!5m2!1sen!2sar",
     moving:
       "Es posible manejarse en cualquier tipo de vehículo, a sólo cinco cuadras se encuentran garitas de colectivo. La casa tiene cochera y además es posible estacionar en la calle, de ambas manos. Siempre hay lugar.",
+    beds_header: "3 colchones de 2 plazas y 4 de 1 plaza",  
     beds: [
       "1 cama de dos plazas y 1 cama de una plaza",
       "1 cama de dos plazas y 1 cama de una plaza",
@@ -108,7 +110,8 @@ export const propertiesData = {
     locationUrl:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.7607430488174!2d-64.4892503246707!3d-31.42071739646025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x942d665bb602cdfd%3A0x1b4f40ce6b431ac!2sRivadavia%20365%2C%20X5152%20Villa%20Carlos%20Paz%2C%20C%C3%B3rdoba!5e0!3m2!1sen!2sar!4v1690131904725!5m2!1sen!2sar",
     moving:
-      "Es posible manejarse en cualquier tipo de vehículo, a sólo dos cuadras se encuentran garitas de colectivo. La casa tiene estacionamiento con media sombra para dos vehículos.",
+      "Es posible manejarse en cualquier tipo de vehículo, a sólo dos cuadras se encuentran garitas de colectivo. La casa tiene estacionamiento con media sombra para dos vehículos.",    
+    beds_header: "1 colchón de 2 plazas y 18 de 1 plaza",  
     beds: [
       "3 camas marineras",
       "1 cama de dos plazas y 1 cama marinera",
@@ -164,6 +167,7 @@ export const propertiesData = {
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3406.975691909325!2d-64.5315842!3d-31.359650000000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x942d6f7f4693048b%3A0x146779e8a1ae8197!2sSierras%20Apartamentos!5e0!3m2!1sen!2sar!4v1694314637555!5m2!1sen!2sar",
     moving:
       "Es posible manejarse en cualquier tipo de vehículo, sobre la ruta hay garitas de colectivo interurbano que conecta el complejo con Cosquín y Villa Carlos Paz.",
+    beds_header: "3 departamentos",  
     beds: [
       "7 huéspedes. 2 camas de dos plazas, 3 de una plaza.",
       "6 huéspedes. 2 camas de dos plazas y 2 de una plaza.",
@@ -400,7 +404,7 @@ const PropertyPage: NextPage<Props> = ({ property, images }) => {
               </p>
               <p>
                 {property.maxCapacity} huéspedes · {property.beds.length}{" "}
-                dormitorios · 19 camas · 3 baños
+                dormitorios · {property.beds_header} · 3 baños
               </p>
             </div>
           </div>
