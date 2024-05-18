@@ -35,6 +35,7 @@ type PropertyType = {
   moving: string;
   beds_header:string;
   beds: string[];
+  dormitorios: number;
   maxCapacity: number;
   items: string[];
   notItems: string[];
@@ -62,9 +63,10 @@ export const propertiesData = {
     beds: [
       "1 cama de dos plazas y 1 cama de una plaza",
       "1 cama de dos plazas y 1 cama de una plaza",
-      "2 camas de una plaza (en el living)",
-      "1 cama de dos plazas"
+      "1 cama de dos plazas",
+      "2 camas de una plaza. Están en el living."
     ],
+    dormitorios: 3,
     maxCapacity: 10,
     items: [
       "Vista a las sierras",
@@ -118,6 +120,7 @@ export const propertiesData = {
       "2 camas marineras",
       "3 camas marineras"
     ],
+    dormitorios: 4,
     maxCapacity: 20,
     items: [
       "Vista a las sierras y a la ciudad",
@@ -173,6 +176,7 @@ export const propertiesData = {
       "6 huéspedes. 2 camas de dos plazas y 2 de una plaza.",
       "5 huéspedes. 1 camas de dos plazas, 1 de una plaza y diván cama (duermen dos)."
     ],
+    dormitorios: 3,
     maxCapacity: 18,
     items: [
       "Vista a las sierras",
@@ -403,7 +407,7 @@ const PropertyPage: NextPage<Props> = ({ property, images }) => {
                 Alojamiento entero. Anfitriona: Carina
               </p>
               <p>
-                {property.maxCapacity} huéspedes · {property.beds.length}{" "}
+                {property.maxCapacity} huéspedes · {property.dormitorios}{" "}
                 dormitorios · {property.beds_header} · 3 baños
               </p>
             </div>
