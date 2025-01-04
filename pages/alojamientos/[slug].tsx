@@ -48,61 +48,7 @@ type Props = {
   images: ImageProps[];
 };
 
-export const propertiesData = {
-  donizetti: {
-    id: "donizetti",
-    title: "Casa en Carlos Paz Pileta",
-    location: "Villa Carlos Paz, Córdoba, Argentina",
-    locationDescription:
-      "Barrio residencial, principalmente habitado por personas de más de 50 años. Tranquilo, con amplia separación entre veredas. Es seguro y se puede estacionar en la calle sin problemas.",
-    locationUrl:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.950226609956!2d-64.52481312467091!3d-31.415497396207904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x942d661c2009e00d%3A0x487c9b60d157875!2sDonizetti%20260%2C%20Villa%20Carlos%20Paz%2C%20C%C3%B3rdoba!5e0!3m2!1sen!2sar!4v1693860248413!5m2!1sen!2sar",
-    moving:
-      "Es posible manejarse en cualquier tipo de vehículo, a sólo cinco cuadras se encuentran garitas de colectivo. La casa tiene cochera y además es posible estacionar en la calle, de ambas manos. Siempre hay lugar.",
-    beds_header: "3 colchones de 2 plazas y 4 de 1 plaza",  
-    beds: [
-      "1 cama de dos plazas y 1 cama de una plaza",
-      "1 cama de dos plazas y 1 cama de una plaza",
-      "1 cama de dos plazas",
-      "2 camas de una plaza. Están en el living."
-    ],
-    dormitorios: 3,
-    maxCapacity: 10,
-    items: [
-      "Vista a las sierras",
-      "Aire acondicionado",
-      "Calefacción",
-      "Cocina y utensillos",
-      "Wifi",
-      "Estacionamiento para 2 vehículos",
-      "Pileta de uso privado",
-      "Se permiten mascotas",
-      "Cámaras de seguridad en la propiedad"
-    ],
-    notItems: [
-      "Toallones",
-      "Juego de Sábanas",
-      "Shampoo y acondicionador",
-      "Secador de pelo",
-      "Lavarropas"
-    ],
-    shortDescription: `Casa con pileta y hermosa vista a las sierras de Villa Carlos Paz. Está equipada y pensada especialmente para grupos grandes de hasta 10 personas.
-
-    Queda a 7 minutos del centro viejo, y a pocos minutos del río Cabalango. La casa está rodeada de almacenes y carnicerías.`,
-    completeDescription: `
-    Tiene estacionamiento para dos autos. El barrio donde está ubicada es residencial, alejada del ruido de avenidas. Ideal para grupos jóvenes, o familias que disfruten del río.
-
-    **El alojamiento**
-    La casa en su interior tiene 3 dormitorios, con el living también habilitado para dormir. La distribución de camas es la siguiente:
-    - 1 cama de dos plazas y 1 cama de una plaza
-    - 1 cama de dos plazas y 1 cama de una plaza
-    - 2 camas de una plaza (en el living)
-    - 1 cama de dos plazas
-
-    Tiene Wi-Fi, calefacción, aire acondicionado en 2 de las habitaciones habitaciones y en el living, cocina con sus utensillos.
-
-    Los demás espacios son comunes y siempre se alquila la totalidad del alojamiento a un grupo familiar - no tenés que compartir espacios con otras personas.`
-  },
+export const propertiesData = {  
   rivadavia: {
     id: "Rivadavia",
     title: "Casa en Centro de Carlos Paz Pileta",

@@ -25,14 +25,6 @@ export default function Home() {
               Rivadavia
             </Link>
           </li>
-          <li className="mb-4">
-            <Link
-              href="/alojamientos/donizetti"
-              className="text-slate-900 text-xl hover:text-slate-600 underline underline-offset-4"
-            >
-              Donizetti
-            </Link>
-          </li>
           <li>
             <Link
               href="/alojamientos/sierras"
