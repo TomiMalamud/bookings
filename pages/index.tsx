@@ -19,7 +19,7 @@ export default function Home() {
         <ul>
           <li className="mb-4">
             <Link
-              href="/alojamientos/rivadavia"
+              href="https://emprendimientosmalamud.notion.site/casa-alquiler-carlos-paz-pileta"
               className="text-slate-900 text-xl hover:text-slate-600 underline underline-offset-4"
             >
               Rivadavia
@@ -27,7 +27,7 @@ export default function Home() {
           </li>
           <li>
             <Link
-              href="/alojamientos/sierras"
+              href="https://sierrasaparts.notion.site/"
               className="text-slate-900 text-xl hover:text-slate-600 underline underline-offset-4"
             >
               Sierras Apartamentos

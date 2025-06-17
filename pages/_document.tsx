@@ -1,6 +1,5 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import Header from "../components/Header";
-import Footer from "../components/Footer";
 
 class MyDocument extends Document {
   render() {
@@ -42,7 +41,6 @@ class MyDocument extends Document {
         <body className="antialiased">
           <Header />
           <Main />
-          {/*<Footer />*/}
           <NextScript />
         </body>
       </Html>
